@@ -61,6 +61,11 @@ var ShiftSpaceShift = new Class({
     this.setup(data.content);
   },
 
+  url: function()
+  {
+    return SSURLForSpace(this.getParentSpace().attributes().name);
+  },
+
   genUUID: function() {
     return SSGenUUID();
   },
@@ -235,8 +240,10 @@ var ShiftSpaceShift = new Class({
   */
   encode: function()
   {
-    if(this.getMainView()) return {position: this.getPosition()};
-    return {};
+    var result = {};
+    if(this.getMainView()) result = {position: this.getPosition()};
+    if(!result.summary) result.summary = "Untitled";
+    return result;
   },
 
   /*
